@@ -3,6 +3,10 @@ Access the form element using the method getElementById()
 The following URL will help you to do this:
 https://www.javascript-coder.com/javascript-form/getelementbyid-form/
 */
+var l = document.getElementById ('txtLength');
+var w = document.getElementById ('txtWidth');
+var h = document.getElementById ('txtHeight');
+
 
 
 
@@ -11,6 +15,7 @@ Also store the tdCost id element as a variable.
 The following link will help you to do this:
 https://www.w3schools.com/jsref/met_document_getelementbyid.asp
 */
+var cost = document.getElementById("tdCost");
 
 
 
@@ -25,6 +30,10 @@ The links below will help you to do this:
 https://www.w3schools.com/js/js_htmldom_document.asp
 https://www.w3schools.com/jsref/event_onclick.asp
 */
+document.getElementById('btnCalcCost').onclick=CalculateCost;
+document.getElementById('btnReset').onclick=resetInputs;
+
+
 
 
 
@@ -35,6 +44,7 @@ Get the value of each variable you created at the beginning
 and store each value as a new variable.
 https://www.javascript-coder.com/javascript-form/getelementbyid-form/
 
+
 Test whether the user has entered a number in
 the text boxes and return an alert if non-numbers are entered. If
 numbers have been entered into the text boxes, calculate the surface area
@@ -43,6 +53,12 @@ https://www.w3schools.com/js/js_functions.asp
 https://www.w3schools.com/jsref/jsref_isNaN.asp
 */
 
+function CalculatingSurfaceArea()  {
+	 var length = new Number(l.value);
+     var width = new Number(w.value);
+	 var height = new Number(h.value);
+	 return ((2*(length*height))+(2*(width*height))+(2*(length*width)));
+}
 
 
 /*
@@ -55,7 +71,12 @@ At the beginning of your function get the value of each variable you
 created at the beginning of your program and store each value as a new variable.
 https://www.javascript-coder.com/javascript-form/getelementbyid-form/
 */
-
+function CalculateLengthEdges()  {
+	 var length = new Number(l.value);
+     var width = new Number(w.value);
+	 var height = new Number(h.value);	
+	return ((2*length)+(2*width)+(4*height));
+}
 
 
 /*
@@ -72,6 +93,28 @@ You can use the URL below to help you do this:
 https://www.w3schools.com/jsref/jsref_tofixed.asp
 */
 
+function CalculateCost() {
+
+var surface_area=CalculatingSurfaceArea()
+var edges = CalculateLengthEdges();
+var glue_cost = 0.10;
+var labour_cost= 60/6000;
+var glass_cost;
+if (h < 26) {
+  glass_cost = 0.6;
+} 
+else {
+  glass_cost = 0.10;
+}
+ var glue = glue_cost*edges;
+ var glass = surface_area*glue_cost;
+
+var gst = 0.1;
+var calculate_gst = glue+glass+labour_cost*gst;
+cost.innerHTML = labour_cost+glue+glass+calculate_gst;
+};
+
+
 
 
 /*
@@ -80,5 +123,14 @@ Use this link to help https://www.w3schools.com/js/tryit.asp?filename=tryjs_form
 
 Also reset the output (tdCost). Use this link to help you do this
 https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_innerhtml_delete
-*/
+*/  
+ function resetInputs() {
+                l.value = '';
+                w.value = '';
+                h.value = '';
+}
 
+function myFunction() {
+  document.getElementById("demo").innerHTML = "";
+}
+</script>
